@@ -1,11 +1,8 @@
 N = int(input())
 
-for i in range(1, N+1):
-    if i == N:
-        print(0)
-    
-    each_num = sum(map(int, str(i)))
-    total = i + each_num
-    if total == N:
+for i in range(max(1, N - len(str(N))*9), N+1):
+    if sum(map(int, str(i))) + i == N:
         print(i)
         break
+    if i == N:
+        print(0)
