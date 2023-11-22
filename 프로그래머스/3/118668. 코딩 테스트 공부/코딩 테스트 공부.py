@@ -1,8 +1,8 @@
 def solution(alp, cop, problems):
-    max_alp, max_cop = 0, 0
-    for alp_req, cop_req, *_ in problems:
-        max_alp = max(max_alp, alp_req)
-        max_cop = max(max_cop, cop_req)
+    max_alp = max(x[0] for x in problems)
+    max_alp = max(max_alp,alp)
+    max_cop = max(x[1] for x in problems)
+    max_cop = max(max_cop,cop)
     alp = min(max_alp, alp)
     cop = min(max_cop, cop)
     max_cost = 100 * (max_alp + max_cop)
