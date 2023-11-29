@@ -1,11 +1,8 @@
 import sys
-input = sys.stdin.readline
 
-N = int(input())
-li=[]
+N = int(sys.stdin.readline())
+li = [int(sys.stdin.readline()) for _ in range(N)]
 
-for i in range(N):
-    li.append(int(input()))
-
-for i in sorted(li):
+li.sort()
+for i in li:
     print(i)
