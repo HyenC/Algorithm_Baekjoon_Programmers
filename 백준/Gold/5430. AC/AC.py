@@ -8,13 +8,11 @@ for _ in range(T):
     p = input().strip()
     n = int(input())
     arr_str = input().strip()[1:-1]
-    if arr_str:
-        arr = deque(arr_str.split(','))
-    else:
-        arr = deque()
-        
+    arr = deque(arr_str.split(',')) if arr_str else deque()
+    
     reverse = False
     error = False
+
     for i in p:
         if i == 'R':
             reverse = not reverse
@@ -30,7 +28,6 @@ for _ in range(T):
                 break
 
     if not error:
-        arr = list(arr) if arr else []
         if reverse:
             arr.reverse()
         print(f"[{','.join(arr)}]")
