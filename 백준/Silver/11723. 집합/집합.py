@@ -5,23 +5,25 @@ M = int(input())
 S = set()
 
 for _ in range(M):
-    order = input().split()
+    command = input().split()
+
+    if command[0] == "all":
+        S = set(range(1, 21))
+        continue
+    elif command[0] == "empty":
+        S.clear()
+        continue
+
+    x = int(command[1])
     
-    if order[0] == 'add':
-        S.add(int(order[1]))
-    elif order[0] == 'remove':
-        S.discard(int(order[1]))
-    elif order[0] == 'check':
-        if int(order[1]) in S:
-            print(1)
+    if command[0] == "add":
+        S.add(x)
+    elif command[0] == "remove":
+        S.discard(x)  # discard 대신 remove를 사용할 경우 요소가 없을 때 에러 발생
+    elif command[0] == "check":
+        print(1 if x in S else 0)
+    elif command[0] == "toggle":
+        if x in S:
+            S.discard(x)
         else:
-            print(0)
-    elif order[0] == 'toggle':
-        if int(order[1]) in S:
-            S.discard(int(order[1]))
-        else:
-            S.add(int(order[1]))
-    elif order[0] == 'all':
-        S = {i + 1 for i in range(20)}
-    else:
-        S = set()
+            S.add(x)
