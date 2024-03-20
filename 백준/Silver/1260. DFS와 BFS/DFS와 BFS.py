@@ -1,35 +1,42 @@
+import sys
 from collections import defaultdict, deque
+input = sys.stdin.readline
 
-def dfs(graph, start, visited=None):
-    if visited is None:
-        visited = []
-    visited.append(start)
-    for node in sorted(graph[start]):
-        if node not in visited:
-            dfs(graph, node, visited)
-    return visited
+def dfs(V):
+    visited[V] = True
+    dfs_li.append(V)
 
-def bfs(graph, start):
-    visited = [start]
-    queue = deque([start])
+    for next_node in sorted(graph[V]):
+        if not visited[next_node]:
+            dfs(next_node)
+            
+def bfs(V):
+    queue = deque([V])
+    visited[V] = True
+    
     while queue:
-        node = queue.popleft()
-        for next_node in sorted(graph[node]):
-            if next_node not in visited:
-                visited.append(next_node)
+        current_node = queue.popleft()
+        bfs_li.append(current_node)
+        
+        for next_node in sorted(graph[current_node]):
+            if not visited[next_node]:
                 queue.append(next_node)
-    return visited
+                visited[next_node] = True
 
 N, M, V = map(int, input().split())
 graph = defaultdict(list)
+visited = [False] * (N + 1)
 
 for _ in range(M):
     a, b = map(int, input().split())
     graph[a].append(b)
     graph[b].append(a)
+    
+dfs_li, bfs_li = [], []
 
-dfs_result = dfs(graph, V)
-bfs_result = bfs(graph, V)
+dfs(V)
+visited = [False] * (N + 1)
+bfs(V)
 
-print(' '.join(map(str, dfs_result)))
-print(' '.join(map(str, bfs_result)))
+print(*dfs_li)
+print(*bfs_li)
